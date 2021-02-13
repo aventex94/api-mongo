@@ -8,6 +8,13 @@ var usersRouter = require('./routes/users');
 
 var app = express();
 
+var mongoose = require('mongoose');
+var mongoDB = 'mongodb://localhost/test';
+mongoose.connect(mongoDB, {useNewUrlParser: true});
+mongoose.Promise = global.Promise;
+var db = mongoose.connection;
+db.on('error',console.error.bind(console,'MongoDB connection error: '));
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
